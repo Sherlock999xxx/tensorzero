@@ -369,7 +369,7 @@ mod tests {
         CreateDatapointsResponse, DeleteDatapointsResponse, FeedbackParams, FeedbackResponse,
         GetConfigResponse, GetDatapointsResponse, GetInferencesRequest, GetInferencesResponse,
         InferenceResponse, ListDatapointsRequest, ListDatasetsRequest, ListDatasetsResponse,
-        ListEpisodesParams, ListEpisodesResponse, ListInferencesRequest, UpdateDatapointRequest,
+        ListEpisodesRequest, ListEpisodesResponse, ListInferencesRequest, UpdateDatapointRequest,
         UpdateDatapointsResponse, WriteConfigRequest, WriteConfigResponse,
     };
     use tensorzero_core::config::snapshot::SnapshotHash;
@@ -483,7 +483,7 @@ mod tests {
 
             async fn list_episodes(
                 &self,
-                params: ListEpisodesParams,
+                request: ListEpisodesRequest,
             ) -> Result<ListEpisodesResponse, TensorZeroClientError>;
 
             async fn launch_optimization_workflow(
