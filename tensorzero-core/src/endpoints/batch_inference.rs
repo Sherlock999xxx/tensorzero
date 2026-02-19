@@ -143,6 +143,14 @@ pub async fn start_batch_inference(
         }));
     }
 
+    if !config.gateway.observability.writes_enabled() {
+        return Err(Error::new(ErrorDetails::InvalidRequest {
+            message: "Batch inference requires observability to be enabled \
+                      (`gateway.observability.enabled` must not be `false`)."
+                .to_string(),
+        }));
+    }
+
     let database = DelegatingDatabaseConnection::new(
         clickhouse_connection_info.clone(),
         postgres_connection_info.clone(),
@@ -507,6 +515,14 @@ pub async fn poll_batch_inference_handler(
     if config.gateway.relay.is_some() {
         return Err(Error::new(ErrorDetails::InvalidRequest {
             message: "poll_batch_inference is not supported in relay mode".to_string(),
+        }));
+    }
+
+    if !config.gateway.observability.writes_enabled() {
+        return Err(Error::new(ErrorDetails::InvalidRequest {
+            message: "Batch inference requires observability to be enabled \
+                      (`gateway.observability.enabled` must not be `false`)."
+                .to_string(),
         }));
     }
 

@@ -203,6 +203,9 @@ async fn feedback_inner(
         .increment(1);
     }
 
+    // For DB writes, also skip when observability is disabled
+    let skip_write = dryrun || !config.gateway.observability.writes_enabled();
+
     match feedback_metadata.r#type {
         FeedbackType::Comment => {
             write_comment(
@@ -212,7 +215,7 @@ async fn feedback_inner(
                 feedback_metadata.target_id,
                 feedback_metadata.level,
                 feedback_id,
-                dryrun,
+                skip_write,
                 config.gateway.unstable_disable_feedback_target_validation,
                 config.hash.clone(),
             )
@@ -226,7 +229,7 @@ async fn feedback_inner(
                 &params,
                 feedback_metadata.target_id,
                 feedback_id,
-                dryrun,
+                skip_write,
             )
             .await?;
         }
@@ -238,7 +241,7 @@ async fn feedback_inner(
                 params,
                 feedback_metadata.target_id,
                 feedback_id,
-                dryrun,
+                skip_write,
                 config.gateway.unstable_disable_feedback_target_validation,
             )
             .await?;
@@ -251,7 +254,7 @@ async fn feedback_inner(
                 params,
                 feedback_metadata.target_id,
                 feedback_id,
-                dryrun,
+                skip_write,
                 config.gateway.unstable_disable_feedback_target_validation,
             )
             .await?;
