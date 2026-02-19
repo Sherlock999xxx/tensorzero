@@ -1,5 +1,6 @@
 import { useEntitySheet } from "~/context/entity-sheet";
 import { InferencePreviewSheet } from "~/components/inference/InferencePreviewSheet";
+import { EpisodePreviewSheet } from "~/components/episode/EpisodePreviewSheet";
 
 export function EntitySheet() {
   const { sheetState, closeSheet } = useEntitySheet();
@@ -15,8 +16,16 @@ export function EntitySheet() {
           onClose={closeSheet}
         />
       );
+    case "episode":
+      return (
+        <EpisodePreviewSheet
+          episodeId={sheetState.id}
+          isOpen
+          onClose={closeSheet}
+        />
+      );
     default: {
-      const _exhaustiveCheck: never = sheetState.type;
+      const _exhaustiveCheck: never = sheetState;
       return _exhaustiveCheck;
     }
   }
