@@ -213,7 +213,8 @@ interface TypeBadgeLinkProps {
 
 export function TypeBadgeLink({ uuid, obj, children }: TypeBadgeLinkProps) {
   const url = toResolvedObjectUrl(uuid, obj);
-  const { openInferenceSheet, openEpisodeSheet } = useEntitySheet();
+  const { openInferenceSheet, openEpisodeSheet, openDatapointSheet } =
+    useEntitySheet();
 
   const handleClick = useCallback(
     (e: React.MouseEvent) => {
@@ -223,9 +224,15 @@ export function TypeBadgeLink({ uuid, obj, children }: TypeBadgeLinkProps) {
       } else if (obj.type === "episode") {
         e.preventDefault();
         openEpisodeSheet(uuid);
+      } else if (
+        obj.type === "chat_datapoint" ||
+        obj.type === "json_datapoint"
+      ) {
+        e.preventDefault();
+        openDatapointSheet(uuid);
       }
     },
-    [obj.type, uuid, openInferenceSheet, openEpisodeSheet],
+    [obj.type, uuid, openInferenceSheet, openEpisodeSheet, openDatapointSheet],
   );
 
   if (!url) return null;

@@ -1,6 +1,7 @@
 import { useEntitySheet } from "~/context/entity-sheet";
 import { InferencePreviewSheet } from "~/components/inference/InferencePreviewSheet";
 import { EpisodePreviewSheet } from "~/components/episode/EpisodePreviewSheet";
+import { DatapointPreviewSheet } from "~/components/datapoint/DatapointPreviewSheet";
 
 export function EntitySheet() {
   const { sheetState, closeSheet } = useEntitySheet();
@@ -20,6 +21,14 @@ export function EntitySheet() {
       return (
         <EpisodePreviewSheet
           episodeId={sheetState.id}
+          isOpen
+          onClose={closeSheet}
+        />
+      );
+    case "datapoint":
+      return (
+        <DatapointPreviewSheet
+          datapointId={sheetState.id}
           isOpen
           onClose={closeSheet}
         />
