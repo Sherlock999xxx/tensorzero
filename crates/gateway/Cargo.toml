@@ -45,7 +45,7 @@ ts-bindings = ["dep:ts-rs", "tensorzero-core/ts-bindings", "tensorzero-optimizer
 
 [dev-dependencies]
 googletest = { workspace = true }
-rmcp = { version = "1.3.0", features = [
+rmcp = { version = "1.4.0", features = [
     "client",
     "transport-streamable-http-client-reqwest",
 ] }
