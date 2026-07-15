@@ -8,7 +8,7 @@ dependencies = [
     "jupyter",
     "markdownify",
     "openai",
-    "tensorzero>=2025.8.5",
+    "tensorzero>=2026.6.0",
     "tqdm>=4.67.1",
     "wikipedia",
 ]
