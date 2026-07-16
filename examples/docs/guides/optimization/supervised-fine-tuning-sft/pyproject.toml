@@ -5,7 +5,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "pandas>=2.3.3",
-    "tensorzero>=2026.3.1",
+    "tensorzero>=2026.6.0",
 ]
 
 [dependency-groups]
